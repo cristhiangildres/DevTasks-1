@@ -3,7 +3,8 @@ import {
   createTask,
   isValidTask,
   filterTasks,
-  getTaskStats
+  getTaskStats,
+  clearCompletedTasks
 } from "../js/taskManager.js";
 
 describe("isValidTask", () => {
@@ -81,5 +82,19 @@ describe("getTaskStats", () => {
 // NOVA TASCA CALCULAR TASCAS
   it("calcula el total de tascas",()=>{
     expect(getTaskStats([{completed:false},{completed:true}]).total).toBe(2);
+  });
+});
+
+describe("clearCompletedTasks", () => {
+  it("retorna només les tasques pendents en un nou array", () => {
+    const tasks = [
+      { id: 1, text: "Una", completed: false },
+      { id: 2, text: "Dues", completed: true }
+    ];
+
+    const pendingTasks = clearCompletedTasks(tasks);
+
+    expect(pendingTasks).toEqual([tasks[0]]);
+    expect(pendingTasks).not.toBe(tasks);
   });
 });
