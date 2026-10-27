@@ -31,3 +31,7 @@ export function getTaskStats(tasks) {
 
     return { total, pending, completed };
 }
+
+export function clearCompletedTasks(tasks) {
+    return tasks.filter(task => !task.completed);
+}
